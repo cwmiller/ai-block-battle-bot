@@ -100,7 +100,7 @@ namespace BlockBattleBot
                                         string[] columns = rows[y].Split(',');
                                         for (int x = 0; x < columns.Length; x++)
                                         {
-                                            Position pos = new Position(x, y);
+                                            Position pos = new Position(x, rows.Length - y - 1);
                                             CellStatus status = (CellStatus)Enum.Parse(typeof(CellStatus), columns[x]);
 
                                             cells.Add(new Cell(pos, status));
