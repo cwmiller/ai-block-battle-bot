@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BlockBattleBot
+﻿namespace BlockBattleBot
 {
     public class Player
     {
@@ -8,20 +6,20 @@ namespace BlockBattleBot
 
         public int Combo { get; set; }
 
-        public List<Cell> Cells { get; set; }
+        public Field Field { get; private set; }
 
         public Player()
         {
             Points = 0;
             Combo = 0;
-            Cells = new List<Cell>();
+            Field = new Field(0, 0);
         }
 
-        public Player(int points, int combo, List<Cell> cells)
+        public Player(int points, int combo, Field field)
         {
             Points = points;
             Combo = combo;
-            Cells = cells;
+            Field = field;
         }
     }
 }

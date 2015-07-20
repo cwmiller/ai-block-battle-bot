@@ -4,21 +4,21 @@
     {
         public int Number { get; set; }
 
-        public Piece Piece { get; set; }
+        public PieceType Piece { get; set; }
 
-        public Piece NextPiece { get; set; }
+        public PieceType NextPiece { get; set; }
 
         public Position PiecePosition { get; set; }
 
         public Round()
         {
             Number = 0;
-            Piece = Piece.I;
-            NextPiece = Piece.I;
+            Piece = PieceType.I;
+            NextPiece = PieceType.I;
             PiecePosition = new Position(0, 0);
         }
 
-        public Round(int number, Piece piece, Piece nextPience, Position piecePosition)
+        public Round(int number, PieceType piece, PieceType nextPience, Position piecePosition)
         {
             Number = number;
             Piece = piece;

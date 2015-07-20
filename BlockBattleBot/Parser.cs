@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BlockBattleBot
@@ -45,9 +44,8 @@ namespace BlockBattleBot
                                 string[] names = segments[2].Split(',');
                                 foreach (var name in names)
                                 {
-                                    Game.Players.Add(name, new Player());
+                                    Game.Players.Add(name, new Player(0, 0, new Field(Game.Settings.FieldWidth, Game.Settings.FieldHeight)));
                                 }
-
                                 break;
                             case "your_bot":
                                 Game.PlayerName = segments[2];
@@ -70,10 +68,10 @@ namespace BlockBattleBot
                                     Game.Round.Number = Convert.ToInt32(segments[3]);
                                     break;
                                 case "this_piece_type":
-                                    Game.Round.Piece = (Piece)Enum.Parse(typeof(Piece), segments[3]);
+                                    Game.Round.Piece = (PieceType)Enum.Parse(typeof(PieceType), segments[3]);
                                     break;
                                 case "next_piece_type":
-                                    Game.Round.NextPiece = (Piece)Enum.Parse(typeof(Piece), segments[3]);
+                                    Game.Round.NextPiece = (PieceType)Enum.Parse(typeof(PieceType), segments[3]);
                                     break;
                                 case "this_piece_position":
                                     int[] points = segments[3].Split(',').Select(point => Convert.ToInt32(point)).ToArray();
@@ -92,22 +90,19 @@ namespace BlockBattleBot
                                     Game.Players[segments[1]].Combo = Convert.ToInt32(segments[3]);
                                     break;
                                 case "field":
-                                    List<Cell> cells = new List<Cell>();
-                                    string[] rows = segments[3].Split(';');
+                                    Game.Players[segments[1]].Field.Reset(Game.Settings.FieldWidth, Game.Settings.FieldHeight);
+
+                                    string[] rows = segments[3].Trim(';').Split(';');
 
                                     for (int y = 0; y < rows.Length; y++)
                                     {
                                         string[] columns = rows[y].Split(',');
                                         for (int x = 0; x < columns.Length; x++)
                                         {
-                                            Position pos = new Position(x, rows.Length - y - 1);
                                             CellStatus status = (CellStatus)Enum.Parse(typeof(CellStatus), columns[x]);
-
-                                            cells.Add(new Cell(pos, status));
+                                            Game.Players[segments[1]].Field.SetCell(x, y, status);
                                         }
                                     }
-
-                                    Game.Players[segments[1]].Cells = cells;
                                     break;
                             }
                         }
