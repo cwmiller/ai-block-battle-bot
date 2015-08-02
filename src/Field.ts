@@ -15,7 +15,7 @@ export class Field {
 		return this._height;
 	}
 	
-	public get hidth(): number {
+	public get width(): number {
 		return this._width;
 	}
 	
