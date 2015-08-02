@@ -1,12 +1,8 @@
-﻿namespace BlockBattleBot
-{
-    public enum Move
-    {
+export enum Move {
         Left,
         Right,
         Down,
         TurnLeft,
         TurnRight,
         Drop
-    }
 }
